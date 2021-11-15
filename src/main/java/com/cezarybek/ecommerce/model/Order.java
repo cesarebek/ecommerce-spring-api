@@ -8,6 +8,7 @@ import java.util.List;
 @Table(name = "[order]")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double totalAmount;
     private LocalDateTime createdAt;

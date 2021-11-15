@@ -6,14 +6,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 @Entity
 @Data
 @NoArgsConstructor
 public class Product {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String productName;
     private Integer inStock;
@@ -26,11 +24,6 @@ public class Product {
     private List<Category> categories;
     @ManyToOne
     private Seller seller;
-
-    public Product(String productName, Integer inStock, List<Category> categories, Seller seller) {
-        this.productName = productName;
-        this.inStock = inStock;
-        this.categories = categories;
-        this.seller = seller;
-    }
+    @OneToMany(mappedBy = "product")
+    private List<Review> reviews;
 }
