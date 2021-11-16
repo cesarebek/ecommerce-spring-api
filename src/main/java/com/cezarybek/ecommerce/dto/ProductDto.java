@@ -1,7 +1,7 @@
 package com.cezarybek.ecommerce.dto;
 
 import com.cezarybek.ecommerce.model.Category;
-import com.cezarybek.ecommerce.model.Seller;
+import com.cezarybek.ecommerce.model.User;
 import lombok.Data;
 
 import java.util.List;
@@ -11,5 +11,5 @@ public class ProductDto {
     private String productName;
     private Integer inStock;
     private List<Category> categoryList;
-    private Seller seller;
+    private User seller;
 }

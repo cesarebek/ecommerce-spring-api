@@ -27,7 +27,7 @@ public class Product {
     private List<Category> categories = new ArrayList<>();
     @JsonIgnore
     @ManyToOne
-    private Seller seller;
+    private User seller;
     @OneToMany(mappedBy = "product")
     private List<Review> reviews = new ArrayList<>();
 }

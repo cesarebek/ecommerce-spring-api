@@ -2,10 +2,10 @@ package com.cezarybek.ecommerce.service;
 
 import com.cezarybek.ecommerce.model.Category;
 import com.cezarybek.ecommerce.model.Product;
-import com.cezarybek.ecommerce.model.Seller;
+import com.cezarybek.ecommerce.model.User;
 import com.cezarybek.ecommerce.repository.CategoryRepository;
 import com.cezarybek.ecommerce.repository.ProductRepository;
-import com.cezarybek.ecommerce.repository.SellerRepository;
+import com.cezarybek.ecommerce.repository.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +23,12 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private SellerRepository sellerRepository;
+    private UserRepository userRepository;
 
     public Product saveProduct(Product product) {
 
         long sellerId = 2;
-        Seller seller = sellerRepository.findById(sellerId).get();
+        User seller = userRepository.findById(sellerId).get();
         product.setSeller(seller);
 
         productRepository.save(product);
@@ -40,11 +40,10 @@ public class ProductService {
         return product;
     }
 
-    public String addCategoryToProduct(String categoryName, long productId) {
+    public void addCategoryToProduct(String categoryName, long productId) {
         Category category = categoryRepository.getCategoryByName(categoryName);
         Product product = productRepository.getById(productId);
         product.getCategories().add(category);
-        return "Category added!";
     }
 
     public List<Product> getAllProducts() {

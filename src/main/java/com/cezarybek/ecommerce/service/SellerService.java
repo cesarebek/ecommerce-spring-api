@@ -1,7 +1,7 @@
 package com.cezarybek.ecommerce.service;
 
-import com.cezarybek.ecommerce.model.Seller;
-import com.cezarybek.ecommerce.repository.SellerRepository;
+import com.cezarybek.ecommerce.model.User;
+import com.cezarybek.ecommerce.repository.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,19 +13,18 @@ import java.util.Optional;
 public class SellerService {
 
     @Autowired
-    private SellerRepository sellerRepository;
+    private UserRepository userRepository;
 
-
-    public Seller registerSeller(Seller seller) {
-        return sellerRepository.save(seller);
+    public User registerSeller(User seller) {
+        return userRepository.save(seller);
     }
 
-    public List<Seller> getAllSellers() {
-        return sellerRepository.findAll();
+    public List<User> getAllSellers() {
+        return userRepository.findAll();
     }
 
-    public Seller getSellerById(long sellerId) throws NotFoundException {
-        Optional<Seller> seller = sellerRepository.findById(sellerId);
+    public User getSellerById(long sellerId) throws NotFoundException {
+        Optional<User> seller = userRepository.findById(sellerId);
         if (seller.isEmpty()) throw new NotFoundException("Seller not found");
         return seller.get();
     }
