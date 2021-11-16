@@ -1,9 +1,11 @@
 package com.cezarybek.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,6 +16,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String productName;
+    private Double price;
     private Integer inStock;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -21,9 +24,10 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id")
     )
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
+    @JsonIgnore
     @ManyToOne
     private Seller seller;
     @OneToMany(mappedBy = "product")
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 }

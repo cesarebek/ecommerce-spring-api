@@ -12,7 +12,7 @@ import java.util.List;
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Double id;
+    private Long id;
     private String sellerName;
     @OneToMany(mappedBy = "seller")
     private List<Product> products;

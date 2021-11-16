@@ -28,4 +28,6 @@ public class CategoryService {
         if (category.isEmpty()) throw new NotFoundException("Category not found");
         return category.get();
     }
+
+
 }
