@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 public class Category {
     @Id
+
     private Long id;
     private String name;
     @ManyToMany(mappedBy = "categories")
