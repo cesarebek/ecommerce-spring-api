@@ -1,12 +1,9 @@
 package com.cezarybek.ecommerce.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
-public class RegisterUserDto {
+public class LoginDto {
     private String username;
-    private String email;
     private String password;
 }

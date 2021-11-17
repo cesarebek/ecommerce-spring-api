@@ -1,15 +1,13 @@
 package com.cezarybek.ecommerce.dto;
 
-import com.cezarybek.ecommerce.model.Category;
-import com.cezarybek.ecommerce.model.User;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Collection;
 
 @Data
 public class ProductDto {
-    private String productName;
+    private String name;
+    private Double price;
     private Integer inStock;
-    private List<Category> categoryList;
-    private User seller;
+    private Collection<Long> categoryIds;
 }

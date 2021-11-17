@@ -1,5 +1,6 @@
 package com.cezarybek.ecommerce.controller;
 
+import com.cezarybek.ecommerce.dto.ProductDto;
 import com.cezarybek.ecommerce.model.Product;
 import com.cezarybek.ecommerce.service.ProductService;
 import javassist.NotFoundException;
@@ -16,7 +17,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/save")
-    public Product addProduct(@RequestBody Product product) {
+    public Product addProduct(@RequestBody ProductDto product) {
         return productService.saveProduct(product);
     }
 
@@ -30,5 +31,19 @@ public class ProductController {
         return productService.getProductById(productId);
     }
 
+    @PostMapping("/{productId}/category/{categoryId}")
+    public Product addCategoryToProduct(@PathVariable final long productId, @PathVariable final long categoryId) {
+        return productService.addCategoryToProduct(categoryId, productId);
+    }
 
+    @GetMapping("/all/category/{categoryId}")
+    public List<Product> getProductsByCategory(@PathVariable final long categoryId) throws NotFoundException {
+        return productService.getProductsByCategory(categoryId);
+    }
+
+    @DeleteMapping("/{productId}/category/{categoryId}")
+    public String removeCategoryFromProduct(@PathVariable final long productId,
+                                            @PathVariable final long categoryId) throws NotFoundException {
+        return productService.removeCategoryFromProduct(categoryId, productId);
+    }
 }

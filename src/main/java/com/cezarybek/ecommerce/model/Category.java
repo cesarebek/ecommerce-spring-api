@@ -18,4 +18,8 @@ public class Category {
     @JsonIgnore
     @ManyToMany(mappedBy = "categories")
     private List<Product> products;
+
+    public Category(String name) {
+        this.name = name;
+    }
 }

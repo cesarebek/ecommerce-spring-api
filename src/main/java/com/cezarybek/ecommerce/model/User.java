@@ -22,7 +22,7 @@ public class User {
     private List<Order> orders;
     @OneToOne(mappedBy = "user")
     private Cart cart;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

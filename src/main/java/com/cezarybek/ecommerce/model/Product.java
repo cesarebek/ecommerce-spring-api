@@ -15,9 +15,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String productName;
+    private String name;
     private Double price;
     private Integer inStock;
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "product_category",
@@ -30,4 +31,6 @@ public class Product {
     private User seller;
     @OneToMany(mappedBy = "product")
     private List<Review> reviews = new ArrayList<>();
+
+
 }
