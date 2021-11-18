@@ -4,7 +4,6 @@ import com.cezarybek.ecommerce.dto.AuthResponseDto;
 import com.cezarybek.ecommerce.dto.LoginDto;
 import com.cezarybek.ecommerce.dto.RegisterUserDto;
 import com.cezarybek.ecommerce.dto.UserResponseDto;
-import com.cezarybek.ecommerce.model.User;
 import com.cezarybek.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +25,8 @@ public class AuthController {
     }
 
     @PostMapping("/seller/register")
-    public User registerSeller() {
-        return userService.registerNewSeller();
+    public UserResponseDto registerSeller(@RequestBody RegisterUserDto user) {
+        return userService.registerNewSeller(user);
     }
 
     @PostMapping("/login")

@@ -16,17 +16,17 @@ public class RoleController {
     private RoleService roleService;
 
     @GetMapping("/all")
-    public List<Role> allCategories() {
+    public List<Role> allRoles() {
         return roleService.getAllRoles();
     }
 
     @PostMapping("/save")
-    public Role addCategory(@RequestBody Role role) {
+    public Role addRole(@RequestBody Role role) {
         return roleService.saveRole(role);
     }
 
     @GetMapping("/{roleId}")
-    public Role getCategory(@PathVariable long roleId) throws NotFoundException {
+    public Role getRole(@PathVariable long roleId) throws NotFoundException {
         return roleService.getRoleById(roleId);
     }
 

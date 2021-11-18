@@ -59,6 +59,7 @@ public class UserService {
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        newUser.setUserType("CUSTOMER");
         userRepository.save(newUser);
 
         //Creating user -> cart (empty)
@@ -81,8 +82,22 @@ public class UserService {
         user.get().getRoles().add(role.get());
     }
 
-    public User registerNewSeller() {
-        return null;
+    public UserResponseDto registerNewSeller(RegisterUserDto user) {
+        checkIfUserAlreadyExist(user.getUsername(), user.getEmail());
+
+        //Creating user
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+        newUser.setEmail(user.getEmail());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        newUser.setUserType("SELLER");
+        userRepository.save(newUser);
+
+        //Adding user -> roles
+        addRoleToUser(user.getUsername(), "ROLE_SELLER");
+
+        //Response
+        return new UserResponseDto(newUser.getId(), newUser.getUsername(), newUser.getEmail());
     }
 
     public ResponseEntity<AuthResponseDto> login(LoginDto loginAttempt) {

@@ -46,4 +46,10 @@ public class ProductController {
                                             @PathVariable final long categoryId) throws NotFoundException {
         return productService.removeCategoryFromProduct(categoryId, productId);
     }
+
+    @PutMapping("/update/{productId}")
+    public Product updateProduct(@PathVariable final long productId,
+                                 @RequestBody ProductDto product) throws NotFoundException {
+        return productService.updateProductById(productId, product);
+    }
 }

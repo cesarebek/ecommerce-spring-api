@@ -1,5 +1,6 @@
 package com.cezarybek.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,6 +15,9 @@ public class CartItem {
     private Double subTotal;
     @ManyToOne
     private Product product;
+    @JsonIgnore
     @ManyToOne
     private Cart cart;
+
+
 }

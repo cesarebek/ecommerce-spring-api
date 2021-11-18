@@ -35,7 +35,7 @@ public class ProductService {
         newProduct.setPrice(product.getPrice());
         newProduct.setInStock(product.getInStock());
 
-        long sellerId = 1;
+        long sellerId = 3;
         User seller = userRepository.findById(sellerId).get();
         newProduct.setSeller(seller);
 
@@ -80,5 +80,22 @@ public class ProductService {
         if (product.isEmpty()) throw new NotFoundException("Product not found");
         product.get().getCategories().removeIf(c -> c.getId() == categoryId);
         return String.format("Category with ID %s removed from %s", categoryId, product.get().getName());
+    }
+
+    public Product updateProductById(long productId, ProductDto productDto) throws NotFoundException {
+        Optional<Product> product = productRepository.findById(productId);
+        if (product.isEmpty()) throw new NotFoundException("Product not found");
+
+        if (productDto.getName() != null) product.get().setName(productDto.getName());
+        if (productDto.getPrice() != null) product.get().setPrice(productDto.getPrice());
+        if (productDto.getInStock() != null) product.get().setInStock(productDto.getInStock());
+        if (productDto.getCategoryIds() != null) {
+            product.get().getCategories().clear();
+            for (Long category : productDto.getCategoryIds()) {
+                addCategoryToProduct(category, product.get().getId());
+            }
+        }
+
+        return product.get();
     }
 }

@@ -16,14 +16,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ErrorDetailsDto> handleAuthenticationException(AuthenticationException e,
                                                                          WebRequest webRequest) {
-        ErrorDetailsDto errorDetails = new ErrorDetailsDto(new Date(), e.getMessage(), webRequest.getContextPath());
+        ErrorDetailsDto errorDetails = new ErrorDetailsDto(new Date(), e.getMessage(), webRequest.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EcommerceException.class)
     public ResponseEntity<ErrorDetailsDto> handleEcommerceException(EcommerceException e,
                                                                     WebRequest webRequest) {
-        ErrorDetailsDto errorDetails = new ErrorDetailsDto(new Date(), e.getMessage(), webRequest.getContextPath());
+        ErrorDetailsDto errorDetails = new ErrorDetailsDto(new Date(), e.getMessage(), webRequest.getDescription(false));
         return new ResponseEntity<>(errorDetails, e.getStatus());
     }
 

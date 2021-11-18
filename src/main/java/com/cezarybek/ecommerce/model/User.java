@@ -17,6 +17,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private String userType;
     //Bi-directional relationship
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
